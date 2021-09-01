@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Yangi post qo`shish {% endblock title %}
+{% block content %}
+<h1>Yangi post qo`shish</h1>
+<form action="" method="POST">{% csrf_token %}
+    {{ form.media }}
+    {{ form | crispy }}
+    <input type="submit" value="Qo`shish">
+</form>
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Postni o`chirish {% endblock title %}
+{% block content %}
+<h1 class="bg-light text-dark">Postni o`chirish</h1>
+<form action="" method="POST">{% csrf_token %}
+    <p><b class="fs-">"{{object.title}}"</b>  postini o`chirmoqchimisiz?</p>
+    <input class="btn btn-primary" type="submit" value="O`chirish">
+
+    <a class="btn btn-danger"  href="{% url 'home' %}">Yo`q</a>
+</form>
+
+
+{% endblock %}

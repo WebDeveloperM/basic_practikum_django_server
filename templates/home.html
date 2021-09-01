@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Asosiy sahifa{% endblock %}
+
+{% block content %}
+<nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
+    <a class="navbar-brand" href="#">Navbar</a>
+ 
+
+    <ul class="nav nav-pills">
+        <li class="nav-item">
+           <a href="{% url 'home' %}">Home</a>
+        </li>
+        {% if user.is_authenticated %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{user.first_name | title}}</a>
+        <ul class="dropdown-menu">
+          <li> <a class="nav-link" href="{% url 'article_new' %}">Yangi post</a></li>
+          <li> <a class="nav-link" href="{% url 'password_change' %}">Parolni o`zgartirish</a></li>
+          <li> <a class="nav-link" href="{% url 'logout' %}">Chiqish</a></li>
+        </ul>
+      </li>
+    </ul>
+      {% else %}
+      <ul  class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Kirish</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'signup' %}">Ro`yhatdan o`tish</a>
+      </li>  
+    </ul>
+    
+    {% endif %}
+  </nav>
+  
+  {% if user.is_authenticated %}
+
+  <div class="card" style="width: 50%; margin-bottom: 25px;">
+
+    {% for post in object_list %}
+    {% if post.image %}
+    <img src="{{post.image.url}}" class="card-img-top" alt="{{post.title}}">
+    {% endif %}
+    <div class="card-body">
+        <a href="{% url 'article_detail' post.pk %}">
+            <h5 class="card-title">{{post.title}}</h5>
+        </a>
+      <p class="card-text">{{post.summary | slice:':100'}}...</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{post.date}}</li>
+      <li class="list-group-item">{{post.author}}</li>
+     
+    </ul>
+    <div class="card-body">
+      <a href="{% url 'article_edit' post.pk %}" class="card-link">Tahrirlash</a>
+      <a href="{% url 'article_delete' post.pk %}" class="card-link">O`chirish</a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <h1 class="bg-success text-light">Postlarni ko`rish uchun saytga kirish kerak</h1>
+    <a href="{% url 'login' %}">Kirish</a>
+    {% endif %}
+  </div>
+
+
+
+
+
+
+{% endblock content %}
+

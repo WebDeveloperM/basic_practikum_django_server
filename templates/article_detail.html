@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{{object.title}} {% endblock title %}
+{% block content %}
+
+<div class="card" style="width: 50%; margin-bottom: 25px;">
+  {% if object.image %}
+  <img src="{{object.image.url}}" class="card-img-top" alt="{{object.title}}">
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{object.title}}</h5>
+    <p class="card-text">{{object.summary}}</p>
+    <p class="card-text">{{object.body | safe}}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{object.date}}</li>
+    <li class="list-group-item">{{object.author}}</li>
+  </ul>
+  <div class="card-body">
+    <a href="{% url 'article_edit' object.pk %}" class="card-link">Tahrirlash</a>
+    <a href="{% url 'article_delete' object.pk %}" class="card-link">O`chirish</a>
+  </div>
+</div>
+
+{% endblock %}

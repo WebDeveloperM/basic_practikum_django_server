@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Kirish {% endblock title %}
+{% block content %}
+<a href=""></a>
+    <h1>Ro`yhatdan o`tish</h1>
+
+
+    <form method="POST"> {% csrf_token %}
+        {{form | crispy}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    
+ 
+{% endblock %}

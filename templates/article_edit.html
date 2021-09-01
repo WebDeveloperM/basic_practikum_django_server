@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Postni tahrirlash {% endblock title %}
+{% block content %}
+<h1>Postni tahrirlash</h1>
+<form action="" method="POST">{% csrf_token %}
+    {{ form.media }}
+    {{ form | crispy }}
+    <input type="submit" value="Tahrirlash">
+</form>
+{% endblock %}
